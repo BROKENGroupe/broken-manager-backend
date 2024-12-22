@@ -3,6 +3,7 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Project extends Document {
+
   @Prop({ required: true })
   name: string;
 
@@ -12,11 +13,29 @@ export class Project extends Document {
   @Prop({ required: true })
   status: string;
 
-  @Prop({ default: Date.now })
-  createdAt: Date;
+  @Prop({ default: new Date().toISOString() })
+  createdAt: string;
 
-  @Prop({ default: Date.now })
-  updatedAt: Date;
+  @Prop({ default: new Date().toISOString() })
+  updatedAt: string;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);
+
+ProjectSchema.set('toJSON', {
+  versionKey: false,
+  transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    return ret;
+  },
+});
+
+ProjectSchema.set('toObject', {
+  versionKey: false,
+  transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    return ret;
+  },
+});

@@ -1,10 +1,6 @@
-import { Type } from 'class-transformer';
-import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
-export class ProjectCreateHttpDto{
-    @IsString()
-    @IsNotEmpty()
-    id: string;
+export class CreateProjectDTO{
   
     @IsString()
     @IsNotEmpty()
@@ -12,17 +8,16 @@ export class ProjectCreateHttpDto{
   
     @IsString()
     @IsOptional()
-    description?: string;
-  
+    description?: string;  
     
     @IsNotEmpty()
     status: string;
   
-    @IsDate()
-    @Type(() => Date)
-    createdAt: Date;
+    @IsString()
+    @IsNotEmpty()
+    createdAt: string;
   
-    @IsDate()
-    @Type(() => Date)
-    updatedAt: Date;
+    @IsString()
+    @IsNotEmpty()
+    updatedAt: string;
 }

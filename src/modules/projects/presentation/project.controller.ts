@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Param, Get, Put } from '@nestjs/common';
-import { ProjectCreateHttpDto } from './http-dtos/project-create-http-dto';
+import { CreateProjectDTO } from './http-dtos/project-create-http-dto';
 import { ProjectsService } from '../application/use-cases/uses-case.service';
+import { ProjectEntity } from '../domain/entities/project.entity';
 
 @Controller('projects')
 export class ProjectController {
@@ -9,12 +10,12 @@ export class ProjectController {
   ) { }
 
   @Get('all')
-  async getProjectAlls() {
+  async getProjectAlls(): Promise<ProjectEntity[]> {
     return await this.projectService.findAll();
   }
 
-  @Get('all2')
-  async getProjectAlls2() {
-    return 'Hello World';
+  @Post('create')
+  async createProject(@Body() createProject: CreateProjectDTO): Promise<ProjectEntity> {
+    return this.projectService.create(createProject);
   }
 }

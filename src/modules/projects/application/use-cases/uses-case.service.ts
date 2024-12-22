@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Project } from '../../infrastructure/databases/schemas/projects.schema';
-
+import { CreateProjectDTO } from '../../presentation/http-dtos/project-create-http-dto';
+import { ProjectEntity } from '../../domain/entities/project.entity';
+import { ProjectRepository } from '../../domain/repositories/project.repository';
 
 @Injectable()
 export class ProjectsService {
-    constructor(
-        @InjectModel(Project.name) private projectModel: Model<Project>,
-    ) {}
 
-    async findAll(): Promise<Project[]> {
-        return this.projectModel.find().exec();
-    }
+  constructor(private readonly projectRepository: ProjectRepository) { }
+
+  async findAll(): Promise<ProjectEntity[]> {
+    return this.projectRepository.findAll();
+  }
+
+  async create(projectDto: CreateProjectDTO): Promise<ProjectEntity> {
+    return this.projectRepository.save(projectDto);
+  }
 }
