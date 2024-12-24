@@ -9,32 +9,36 @@ import { CreateProjectDto } from "../../presentation/http-dtos/project-create-ht
 @Injectable()
 export class MongoDBRespositoryImpl extends ProjectRepository {
 
-    async findAll() {
-        return await this.projectModel.find().exec()
-    }
-
-    constructor(@InjectModel(Project.name) private readonly projectModel: Model<Project>) {
+    constructor(@InjectModel(Project.name)
+    private readonly projectModel: Model<Project>) {
         super();
     }
 
-    findById(id: string): Promise<ProjectEntity> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<ProjectEntity[]> {
+        return await this.projectModel.find().exec()
     }
 
-    save(project: CreateProjectDto) {
+    async findById(id: string): Promise<ProjectEntity | []> {
+        const result = await this.projectModel.findById(id)
+        return result ?? []
+    }
+
+    async save(project: CreateProjectDto): Promise<ProjectEntity> {
         const newProject = new this.projectModel(project)
-        newProject.save()
-        return newProject
+        return await newProject.save()
     }
 
-    update(project: CreateProjectDto) {
-        throw new Error("Method not implemented.");
-
+    async update(id: string, project: CreateProjectDto): Promise<ProjectEntity | null> {
+        const result = await this.projectModel.findByIdAndUpdate(id, project, {
+            new: true,
+            runValidators: true
+        })
+        return result ?? null
     }
 
-    getAll() {
-        const res = this.projectModel.find()
-        return res
+    async delete(id: string): Promise<boolean> {
+        const result = await this.projectModel.findByIdAndDelete(id)
+        return result !== null
     }
 
 }

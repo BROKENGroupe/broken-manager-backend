@@ -1,4 +1,4 @@
-import { StaticImageData } from "../../infrastructure/databases/schemas/projects.schema";
+import { Image } from "../../domain/models/image.interface";
 
 export interface ProjectDto{
     id?: string;
@@ -9,7 +9,7 @@ export interface ProjectDto{
     priority?: string;
     description?: string;
     percentage?: number;
-    assign?: { image: StaticImageData; label: string; value: string }[];
+    assign?: { image: Image; label: string; value: string }[];
     assignDate?: string;
     dueDate?: string;
     createAt?: string;

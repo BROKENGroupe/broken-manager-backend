@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Project, ProjectSchema } from './infrastructure/databases/schemas/projects.schema';
 import { UseCaseService } from './application/use-cases/uses-case.service';
 import { DatabaseModule } from 'src/shared/infrastructure/databases/database/database.module';
+import { ValidationDbPipe } from '@/src/common/pipes/validation-db/validation-db.pipe';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DatabaseModule } from 'src/shared/infrastructure/databases/database/dat
   providers: [
     UseCaseService,
     MongoDBRespositoryImpl,
+    ValidationDbPipe,
     {
       provide: ProjectRepository,
       useExisting: MongoDBRespositoryImpl

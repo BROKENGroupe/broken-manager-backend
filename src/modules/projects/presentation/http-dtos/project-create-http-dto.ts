@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
-import { StaticImageData } from '../../infrastructure/databases/schemas/projects.schema';
+import { Image } from '../../domain/models/image.interface';
 
 export class CreateProjectDto {
     @IsOptional()
@@ -35,7 +35,7 @@ export class CreateProjectDto {
     readonly percentage: number;
 
     @IsNotEmpty()
-    readonly assign: Array<{ image: StaticImageData; label: string; value: string }>;
+    readonly assign: Array<{ image: Image; label: string; value: string }>;
     
     @IsNotEmpty()
     @IsString()
