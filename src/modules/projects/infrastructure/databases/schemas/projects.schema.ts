@@ -1,23 +1,64 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Image } from '../../../domain/models/image.interface';
 
 @Schema()
-export class Project extends Document {
+export class Project extends Document{
+
+  @Prop()
+  id?: string;
 
   @Prop({ required: true })
-  name: string;
+  title: string;
+
+  @Prop()
+  subtitle: string;
+
+  @Prop({ default: 'in progress' })
+  status: string;
+
+  @Prop()
+  label: string;
+
+  @Prop({ default: 'low' })
+  priority: string;
 
   @Prop()
   description: string;
 
-  @Prop({ required: true })
-  status: string;
+  @Prop({ default: 0 })
+  percentage: number;
+
+  @Prop([
+    {
+      image: {
+        src: { type: String },
+        height: { type: Number },
+        width: { type: Number },
+        blurDataURL: { type: String },
+        blurWidth: { type: Number },
+        blurHeight: { type: Number },
+      },
+      label: { type: String },
+      value: { type: String },
+    },
+  ])
+  assign: Array<{ image: Image; label: string; value: string }>;
+
+  @Prop({ default: new Date().toISOString() })
+  assignDate: string;
+
+  @Prop({ default: new Date().toISOString() })
+  dueDate: string;
 
   @Prop({ default: new Date().toISOString() })
   createdAt: string;
 
   @Prop({ default: new Date().toISOString() })
   updatedAt: string;
+
+  @Prop({ default: false })
+  isFavorite: boolean;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

@@ -4,7 +4,7 @@ import { ProjectRepository } from './domain/repositories/project.repository';
 import { MongoDBRespositoryImpl } from './infrastructure/databases/mogodb.repositoryImpl';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Project, ProjectSchema } from './infrastructure/databases/schemas/projects.schema';
-import { ProjectsService } from './application/use-cases/uses-case.service';
+import { UseCaseService } from './application/use-cases/uses-case.service';
 import { DatabaseModule } from 'src/shared/infrastructure/databases/database/database.module';
 
 @Module({
@@ -18,7 +18,7 @@ import { DatabaseModule } from 'src/shared/infrastructure/databases/database/dat
     ProjectController
   ],
   providers: [
-    ProjectsService,
+    UseCaseService,
     MongoDBRespositoryImpl,
     {
       provide: ProjectRepository,
@@ -26,7 +26,7 @@ import { DatabaseModule } from 'src/shared/infrastructure/databases/database/dat
     },
   ],
   exports: [    
-    ProjectsService
+    UseCaseService
   ]
 })
 export class ProjectModule { }

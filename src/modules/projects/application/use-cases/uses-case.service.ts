@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProjectDTO } from '../../presentation/http-dtos/project-create-http-dto';
+import { CreateProjectDto } from '../../presentation/http-dtos/project-create-http-dto';
 import { ProjectEntity } from '../../domain/entities/project.entity';
 import { ProjectRepository } from '../../domain/repositories/project.repository';
 
 @Injectable()
-export class ProjectsService {
+export class UseCaseService {
 
   constructor(private readonly projectRepository: ProjectRepository) { }
 
@@ -12,7 +12,7 @@ export class ProjectsService {
     return this.projectRepository.findAll();
   }
 
-  async create(projectDto: CreateProjectDTO): Promise<ProjectEntity> {
+  async create(projectDto: CreateProjectDto): Promise<ProjectEntity> {
     return this.projectRepository.save(projectDto);
   }
 }
