@@ -1,11 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-// Interfaz para el documento de Usuario
-export type UserDocument = User & Document;
-
 @Schema()
-export class User {
+export class User extends Document {
 
     @Prop()
     id?: string;
@@ -19,28 +16,18 @@ export class User {
     @Prop({ required: true })
     password: string;
 
-    @Prop({ enum: ['user', 'admin', 'superadmin'], default: 'user' })
-    role: string;
+    @Prop({ type: [String], enum: ['user', 'admin', 'superadmin'], default: 'user' })
+    roles: string[];
 
     @Prop({ default: true })
     isActive: boolean;
 
-    @Prop({
-        type: {
-            firstName: { type: String },
-            lastName: { type: String },
-            avatar: { type: String },
-            phone: { type: String },
-            address: { type: String },
-        },
-    })
-    profile: {
-        firstName: string;
-        lastName: string;
-        avatar: string;
-        phone: string;
-        address: string;
-    };
+    @Prop({ default: new Date().toISOString() })
+    createdAt: string;
+
+    @Prop({ default: new Date().toISOString() })
+    updatedAt: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
