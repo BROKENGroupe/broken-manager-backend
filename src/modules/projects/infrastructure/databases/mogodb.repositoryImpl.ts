@@ -1,9 +1,9 @@
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { isValidObjectId, Model, Types } from "mongoose";
 import { ProjectEntity } from "../../domain/entities/project.entity";
 import { ProjectRepository } from "../../domain/repositories/project.repository";
 import { Project } from "./schemas/projects.schema";
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { CreateProjectDto } from "../../presentation/http-dtos/project-create-http-dto";
 
 @Injectable()
@@ -19,6 +19,18 @@ export class MongoDBRespositoryImpl extends ProjectRepository {
     }
 
     async findById(id: string): Promise<ProjectEntity | []> {
+
+        if (!isValidObjectId(id)) {
+            throw new BadRequestException(`El ID proporcionado (${id}) no es válido.`);
+        }
+
+        const projectId = new Types.ObjectId(id);
+
+        const project = await this.projectModel.findById(projectId);
+        if (!project) {
+            throw new NotFoundException(`No se encontró un registro con ID ${projectId}.`);
+        }
+
         const result = await this.projectModel.findById(id)
         return result ?? []
     }
@@ -28,8 +40,20 @@ export class MongoDBRespositoryImpl extends ProjectRepository {
         return await newProject.save()
     }
 
-    async update(id: string, project: CreateProjectDto): Promise<ProjectEntity | null> {
-        const result = await this.projectModel.findByIdAndUpdate(id, project, {
+    async update(id: string, projectDto: CreateProjectDto): Promise<ProjectEntity | null> {
+
+        if (!isValidObjectId(id)) {
+            throw new BadRequestException(`El ID proporcionado (${id}) no es válido.`);
+        }
+
+        const projectId = new Types.ObjectId(id);
+
+        const project = await this.projectModel.findById(projectId);
+        if (!project) {
+            throw new NotFoundException(`No se encontró un registro con ID ${projectId}.`);
+        }
+
+        const result = await this.projectModel.findByIdAndUpdate(id, projectDto, {
             new: true,
             runValidators: true
         })
@@ -37,6 +61,18 @@ export class MongoDBRespositoryImpl extends ProjectRepository {
     }
 
     async delete(id: string): Promise<boolean> {
+
+        if (!isValidObjectId(id)) {
+            throw new BadRequestException(`El ID proporcionado (${id}) no es válido.`);
+        }
+
+        const projectId = new Types.ObjectId(id);
+
+        const project = await this.projectModel.findById(projectId);
+        if (!project) {
+            throw new NotFoundException(`No se encontró un registro con ID ${projectId}.`);
+        }
+
         const result = await this.projectModel.findByIdAndDelete(id)
         return result !== null
     }

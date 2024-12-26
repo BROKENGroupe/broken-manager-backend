@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ProjectController } from './presentation/project.controller';
 import { ProjectRepository } from './domain/repositories/project.repository';
 import { MongoDBRespositoryImpl } from './infrastructure/databases/mogodb.repositoryImpl';

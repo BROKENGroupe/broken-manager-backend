@@ -17,7 +17,6 @@ export class ProjectController {
   }
 
   @Get(':id')
-  @UsePipes(ValidationDbPipe)
   async getProjectById(@Param('id') id: string): Promise<ProjectEntity | []> {
     return await this.useCaseService.findById(id);
   }
@@ -28,7 +27,6 @@ export class ProjectController {
   }
 
   @Put('update/:id')
-  @UsePipes(ValidationDbPipe)
   async updateProject(
     @Param('id') id: string,
     @Body() project: UpdateProjectDto): Promise<ProjectEntity> {
@@ -36,7 +34,6 @@ export class ProjectController {
   }
 
   @Delete('delete/:id')
-  @UsePipes(ValidationDbPipe)
   async deleteProject(@Param('id') id: string): Promise<boolean> {
     return this.useCaseService.delete(id);
   }
