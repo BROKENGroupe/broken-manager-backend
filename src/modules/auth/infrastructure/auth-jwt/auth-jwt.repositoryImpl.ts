@@ -3,8 +3,8 @@ import { AuthEntity } from "../../domain/entities/auth.entity";
 import { AuthRepository } from "../../domain/repositories/auth.repository";
 import { AuthSignInDto } from "../../presentation/http-dtos/auth-signin-http.dto";
 import { AuthSignUpDto } from "../../presentation/http-dtos/auth.singup-http.dto";
-import { JwtService } from "@nestjs/jwt";
 import { AuthJwtService } from "./auth-jwt.service";
+import { UserLogin } from "../../domain/entities/user-login.entity";
 
 @Injectable()
 export class AuthJwtRepositoryImpl extends AuthRepository {
@@ -15,7 +15,7 @@ export class AuthJwtRepositoryImpl extends AuthRepository {
     }
 
 
-    async singIn(authSignInDto: AuthSignInDto): Promise<AuthEntity> {
+    async singIn(authSignInDto: AuthSignInDto): Promise<UserLogin | null> {
         return await this.authJwtService.validateUser(authSignInDto.email, authSignInDto.password);
     }
     signUp(authSignUpDto: AuthSignUpDto): Promise<AuthEntity> {
