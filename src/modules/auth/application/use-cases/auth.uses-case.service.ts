@@ -10,7 +10,6 @@ export class AuthUseCaseService {
 
     async login(userLogin: AuthSignInDto): Promise<UserLogin | null> {
         return this.authRepository.singIn(userLogin);
-
     }
 
 }

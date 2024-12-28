@@ -18,20 +18,22 @@ export class AuthJwtService {
         if (user?.email == email) {
             const isMatch = await compare(password, user.password);
             if (isMatch) {
-                const userLogin: UserLogin = {                    
-                    email: user.email,                                    
-                    username: user.username, 
-                    access_token: this.generateJWT(user).access_token                   
+                const userLogin: UserLogin = {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                    access_token: this.generateJWT(user).access_token,
+                    image: user.image
                 }
 
                 return userLogin;
-            }else{
-                return null;           
+            } else {
+                return null;
             }
-        }else{
+        } else {
             return null;
         }
-        
+
     }
 
     private generateJWT(user: UserEntity) {

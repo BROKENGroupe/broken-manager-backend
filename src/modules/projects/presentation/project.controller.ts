@@ -3,7 +3,7 @@ import { CreateProjectDto } from './http-dtos/project-create-http-dto';
 import { UseCaseService } from '../application/use-cases/uses-case.service';
 import { ProjectEntity } from '../domain/entities/project.entity';
 import { UpdateProjectDto } from './http-dtos/project-update-http-dto';
-import { ValidationDbPipe } from '@/src/common/pipes/validation-db/validation-db.pipe';
+import { successResponseDto } from '@/src/common/handler/http/http-response.dto';
 
 @Controller('projects')
 export class ProjectController {
@@ -12,7 +12,7 @@ export class ProjectController {
   ) { }
 
   @Get('all')
-  async getProjectAlls(): Promise<ProjectEntity[]> {
+  async getProjectAll(): Promise<ProjectEntity[]> {
     return await this.useCaseService.findAll();
   }
 
@@ -34,7 +34,7 @@ export class ProjectController {
   }
 
   @Delete('delete/:id')
-  async deleteProject(@Param('id') id: string): Promise<boolean> {
+  async deleteProject(@Param('id') id: string): Promise<successResponseDto> {
     return this.useCaseService.delete(id);
   }
 }

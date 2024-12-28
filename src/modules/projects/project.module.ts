@@ -5,8 +5,10 @@ import { MongoDBRespositoryImpl } from './infrastructure/databases/mogodb.reposi
 import { MongooseModule } from '@nestjs/mongoose';
 import { Project, ProjectSchema } from './infrastructure/databases/schemas/projects.schema';
 import { UseCaseService } from './application/use-cases/uses-case.service';
-import { DatabaseModule } from 'src/shared/infrastructure/databases/database/database.module';
+import { DatabaseModule } from '@/src/database/database.module';
 import { ValidationDbPipe } from '@/src/common/pipes/validation-db/validation-db.pipe';
+import { GlobalExceptionFilter } from '@/src/common/handler/http/http-response.handler';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -26,8 +28,12 @@ import { ValidationDbPipe } from '@/src/common/pipes/validation-db/validation-db
       provide: ProjectRepository,
       useExisting: MongoDBRespositoryImpl
     },
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter
+    }
   ],
-  exports: [    
+  exports: [
     UseCaseService
   ]
 })

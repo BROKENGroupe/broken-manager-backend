@@ -1,9 +1,9 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ProjectModule } from './modules/projects/project.module';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './shared/infrastructure/databases/database/database.module';
+import { DatabaseModule } from './database/database.module';
 import * as Joi from 'joi';
-import config from './shared/infrastructure/databases/config';
+import config from './database/config';
 import { enviroments } from './enviroments';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthController } from './modules/auth/presentation/auth.controller';

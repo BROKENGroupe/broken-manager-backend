@@ -1,7 +1,6 @@
-import { Image } from "@/src/modules/projects/domain/models/image.interface";
-import { IsArray, IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsEmail, IsOptional, IsString } from "class-validator";
 
-export class CreateUserDto {
+export class UpdateUserDto {
     
     @IsString()
     id?: string;
@@ -17,9 +16,6 @@ export class CreateUserDto {
 
     @IsArray()
     roles: string[];
-
-    @IsNotEmpty()
-    readonly image: Image;
     
     @IsBoolean()
     isActive: boolean;

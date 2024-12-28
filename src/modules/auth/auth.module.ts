@@ -7,6 +7,8 @@ import { UserModule } from '../users/user.module';
 import { AuthRepository } from './domain/repositories/auth.repository';
 import { AuthJwtRepositoryImpl } from './infrastructure/auth-jwt/auth-jwt.repositoryImpl';
 import { AuthJwtService } from './infrastructure/auth-jwt/auth-jwt.service';
+import { APP_FILTER } from '@nestjs/core';
+import { GlobalExceptionFilter } from '@/src/common/handler/http/http-response.handler';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { AuthJwtService } from './infrastructure/auth-jwt/auth-jwt.service';
         signOptions: { expiresIn: '10000s' }
       })
     }),
-    UserModule
+    UserModule,    
   ],
   controllers: [AuthController],
   providers: [
@@ -28,6 +30,10 @@ import { AuthJwtService } from './infrastructure/auth-jwt/auth-jwt.service';
     {
       provide: AuthRepository,
       useExisting: AuthJwtRepositoryImpl
+    },
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter
     }
   ],
   exports: [AuthUseCaseService]

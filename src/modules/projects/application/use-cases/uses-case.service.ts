@@ -3,6 +3,7 @@ import { CreateProjectDto } from '../../presentation/http-dtos/project-create-ht
 import { ProjectEntity } from '../../domain/entities/project.entity';
 import { ProjectRepository } from '../../domain/repositories/project.repository';
 import { UpdateProjectDto } from '../../presentation/http-dtos/project-update-http-dto';
+import { successResponseDto } from '@/src/common/handler/http/http-response.dto';
 
 @Injectable()
 export class UseCaseService {
@@ -25,7 +26,7 @@ export class UseCaseService {
     return this.projectRepository.update(id, projectDto);
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: string): Promise<successResponseDto> {
     return this.projectRepository.delete(id);
   }
 }

@@ -1,7 +1,7 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService, ConfigType } from '@nestjs/config';
-import config from '../config';
+import config from './config';
 
 @Module({})
 export class DatabaseModule {

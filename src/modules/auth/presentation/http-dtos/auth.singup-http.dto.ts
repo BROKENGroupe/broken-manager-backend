@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsEmail, IsArray, IsDateString } from "class-validator";
+import { IsNotEmpty, IsString, IsEmail, IsArray, IsDateString, IsOptional } from "class-validator";
 
 export class AuthSignUpDto {
     @IsNotEmpty()
@@ -13,16 +13,16 @@ export class AuthSignUpDto {
     @IsString()
     readonly password: string;
   
-    @IsNotEmpty()
+    @IsOptional()
     @IsArray()
     @IsString({ each: true })
     readonly roles: string[];
   
-    @IsNotEmpty()
+    @IsOptional()
     @IsDateString()
     readonly createdAt: string;
   
-    @IsNotEmpty()
+    @IsOptional()
     @IsDateString()
     readonly updatedAt: string;
   }
