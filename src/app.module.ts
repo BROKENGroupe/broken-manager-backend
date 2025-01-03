@@ -5,6 +5,7 @@ import config from '@database/config';
 import { ProjectModule } from '@projects/project.module';
 import { UserModule } from '@users/user.module';
 import { AuthModule } from '@auth/auth.module';
+import { BoardsModule } from './modules/boards/boards.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -22,7 +23,8 @@ import * as Joi from 'joi';
     }),
     ProjectModule,
     UserModule,
-    AuthModule    
+    AuthModule,
+    BoardsModule    
   ],
   controllers: [],
   providers: [],

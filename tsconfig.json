@@ -20,6 +20,7 @@
     "paths": {
       "@auth/*": ["src/modules/auth/*"],
       "@projects/*": ["src/modules/projects/*"],
+      "@boards/*": ["src/modules/boards/*"],
       "@users/*": ["src/modules/users/*"],      
       "@common/*": ["src/common/*"],
       "@config/*": ["src/config/*"],
