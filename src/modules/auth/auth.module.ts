@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AuthUseCaseService } from './application/use-cases/auth.uses-case.service';
-import { AuthController } from './presentation/auth.controller';
+import { AuthUseCaseService } from '@auth/application';
+import { AuthController } from '@auth/presentation';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { UserModule } from '../users/user.module';
-import { AuthRepository } from './domain/repositories/auth.repository';
-import { AuthJwtRepositoryImpl } from './infrastructure/auth-jwt/auth-jwt.repositoryImpl';
-import { AuthJwtService } from './infrastructure/auth-jwt/auth-jwt.service';
+import { AuthRepository } from '@auth/domain';
+import { AuthJwtRepositoryImpl } from '@auth/infrastructure';
+import { AuthJwtService } from '@auth/infrastructure';
 import { APP_FILTER } from '@nestjs/core';
-import { GlobalExceptionFilter } from '@/src/common/handler/http/http-response.handler';
+import { GlobalExceptionFilter } from '@common/handler/http';
+import { UserModule } from '@users/user.module';
 
 @Module({
   imports: [

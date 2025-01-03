@@ -1,13 +1,11 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { ProjectModule } from './modules/projects/project.module';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
+import { enviroments } from '@enviroments/enviroments';
+import config from '@database/config';
+import { ProjectModule } from '@projects/project.module';
+import { UserModule } from '@users/user.module';
+import { AuthModule } from '@auth/auth.module';
 import * as Joi from 'joi';
-import config from './database/config';
-import { enviroments } from './enviroments';
-import { AuthModule } from './modules/auth/auth.module';
-import { AuthController } from './modules/auth/presentation/auth.controller';
-import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -26,20 +24,7 @@ import { UserModule } from './modules/users/user.module';
     UserModule,
     AuthModule    
   ],
-  controllers: [AuthController],
+  controllers: [],
   providers: [],
 })
-export class AppModule {
-  // static async forRoot(): Promise<DynamicModule> {
-  //   return {
-  //     module: AppModule,
-  //     imports: [
-  //       ConfigModule.forRoot({
-  //         isGlobal: true, // Configuración global
-  //         load: [config]
-  //       }),
-  //       DatabaseModule.forRoot(), // Llamada asincrónica
-  //     ],
-  //   };
-  // }
-}
+export class AppModule {}

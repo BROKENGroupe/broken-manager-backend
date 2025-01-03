@@ -1,4 +1,4 @@
-import { Image } from "@/src/modules/projects/domain/models/image.interface";
+import { Image } from "@projects/domain";
 
 export class UserLogin {
     public readonly id: string;

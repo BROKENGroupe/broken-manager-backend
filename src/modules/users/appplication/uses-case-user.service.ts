@@ -3,7 +3,7 @@ import { UserRepository } from '../domain/repositories/user.repository';
 import { UserEntity } from '../domain/entities/user.entity';
 import { CreateUserDto } from '../presentation/dtos/create-user.http.dto';
 import { UpdateUserDto } from '../presentation/dtos/update-user.http.dto';
-import { successResponseDto } from '@/src/common/handler/http/http-response.dto';
+import { successResponseDto } from '@common/handler/http/http-response.dto';
 
 @Injectable()
 export class UsesCaseUserService {

@@ -5,8 +5,8 @@ import { ProjectRepository } from "../../domain/repositories/project.repository"
 import { Project } from "./schemas/projects.schema";
 import {HttpException, Injectable } from "@nestjs/common";
 import { CreateProjectDto } from "../../presentation/http-dtos/project-create-http-dto";
-import { HttpErrors, HttpSuccess } from "@/src/common/handler/http/http-errors-constants";
-import { successResponseDto } from "@/src/common/handler/http/http-response.dto";
+import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
+import { successResponseDto } from "@common/handler/http/http-response.dto";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends ProjectRepository {

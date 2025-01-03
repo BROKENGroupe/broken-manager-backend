@@ -1,4 +1,4 @@
-import { Image } from '@/src/modules/projects/domain/models/image.interface';
+import { Image } from '@projects/domain';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 

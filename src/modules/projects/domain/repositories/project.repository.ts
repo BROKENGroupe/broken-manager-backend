@@ -1,4 +1,4 @@
-import { successResponseDto } from '@/src/common/handler/http/http-response.dto';
+import { successResponseDto } from '@common/handler/http/http-response.dto';
 import { CreateProjectDto } from '../../presentation/http-dtos/project-create-http-dto';
 import { UpdateProjectDto } from '../../presentation/http-dtos/project-update-http-dto';
 import { ProjectEntity } from '../entities/project.entity';

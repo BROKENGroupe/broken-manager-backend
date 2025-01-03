@@ -1,4 +1,4 @@
-import { Project } from '@/src/modules/projects/infrastructure/databases/schemas/projects.schema';
+import { Project } from '@projects/infrastructure';
 import { ArgumentMetadata, BadRequestException, Injectable, NotFoundException, PipeTransform } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model, Types } from 'mongoose';

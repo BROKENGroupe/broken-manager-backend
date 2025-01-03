@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ProjectController } from './presentation/project.controller';
-import { ProjectRepository } from './domain/repositories/project.repository';
-import { MongoDBRespositoryImpl } from './infrastructure/databases/mogodb.repositoryImpl';
+import { ProjectController } from '@projects/presentation';
+import { ProjectRepository } from '@projects/domain';
+import { MongoDBRespositoryImpl } from '@projects/infrastructure';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Project, ProjectSchema } from './infrastructure/databases/schemas/projects.schema';
-import { UseCaseService } from './application/use-cases/uses-case.service';
-import { DatabaseModule } from '@/src/database/database.module';
-import { ValidationDbPipe } from '@/src/common/pipes/validation-db/validation-db.pipe';
-import { GlobalExceptionFilter } from '@/src/common/handler/http/http-response.handler';
+import { Project, ProjectSchema } from '@projects/infrastructure';
+import { UseCaseService } from '@projects/application';
+import { DatabaseModule } from '@database/database.module';
 import { APP_FILTER } from '@nestjs/core';
+import { GlobalExceptionFilter } from '@common/handler';
 
 @Module({
   imports: [
@@ -23,7 +22,6 @@ import { APP_FILTER } from '@nestjs/core';
   providers: [
     UseCaseService,
     MongoDBRespositoryImpl,
-    ValidationDbPipe,
     {
       provide: ProjectRepository,
       useExisting: MongoDBRespositoryImpl

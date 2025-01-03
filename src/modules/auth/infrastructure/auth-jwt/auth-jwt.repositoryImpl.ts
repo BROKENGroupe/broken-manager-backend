@@ -5,7 +5,7 @@ import { AuthSignInDto } from "../../presentation/http-dtos/auth-signin-http.dto
 import { AuthSignUpDto } from "../../presentation/http-dtos/auth.singup-http.dto";
 import { AuthJwtService } from "./auth-jwt.service";
 import { UserLogin } from "../../domain/entities/user-login.entity";
-import { HttpErrors } from "@/src/common/handler/http/http-errors-constants";
+import { HttpErrors } from "@common/handler/http/http-errors-constants";
 
 @Injectable()
 export class AuthJwtRepositoryImpl extends AuthRepository {

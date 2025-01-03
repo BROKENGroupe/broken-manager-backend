@@ -1,4 +1,4 @@
-import { successResponseDto } from "@/src/common/handler/http/http-response.dto";
+import { successResponseDto } from "@common/handler/http/http-response.dto";
 import { CreateUserDto } from "../../presentation/dtos/create-user.http.dto";
 import { UpdateUserDto } from "../../presentation/dtos/update-user.http.dto";
 import { UserEntity } from "../entities/user.entity";

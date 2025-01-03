@@ -1,9 +1,9 @@
-import { UsesCaseUserService } from '@/src/modules/users/appplication/uses-case-user.service';
-import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt'
-import { UserLogin } from '../../domain/entities/user-login.entity';
-import { UserEntity } from '@/src/modules/users/domain/entities/user.entity';
+import { UserLogin } from '@auth/domain';
+import { UserEntity } from '@users/domain';
+import { UsesCaseUserService } from '@users/appplication';
 
 @Injectable()
 export class AuthJwtService {

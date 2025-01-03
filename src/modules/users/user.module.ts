@@ -1,11 +1,11 @@
-import { DatabaseModule } from '@/src/database/database.module';
+
 import { Module } from '@nestjs/common';
-import { UserController } from './presentation/user.controller';
-import { UsesCaseUserService } from './appplication/uses-case-user.service';
+import { UserController } from '@users/presentation';
+import { UsesCaseUserService } from '@users/appplication';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './infrastructure/databases/schemas/user.schema';
-import { UserRepository } from './domain/repositories/user.repository';
-import { MongoDBRespositoryImpl } from './infrastructure/mongodb.repositoryImpl';
+import { UserRepository } from '@users/domain';
+import { DatabaseModule } from '@database/database.module';
+import { MongoDBRespositoryImpl, User, UserSchema } from '@users/infrastructure';
 
 @Module({
     imports: [

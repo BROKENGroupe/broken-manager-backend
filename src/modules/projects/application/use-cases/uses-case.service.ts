@@ -3,7 +3,7 @@ import { CreateProjectDto } from '../../presentation/http-dtos/project-create-ht
 import { ProjectEntity } from '../../domain/entities/project.entity';
 import { ProjectRepository } from '../../domain/repositories/project.repository';
 import { UpdateProjectDto } from '../../presentation/http-dtos/project-update-http-dto';
-import { successResponseDto } from '@/src/common/handler/http/http-response.dto';
+import { successResponseDto } from '@common/handler/http/http-response.dto';
 
 @Injectable()
 export class UseCaseService {

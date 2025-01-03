@@ -1,4 +1,4 @@
-import { Image } from "@/src/modules/projects/domain/models/image.interface";
+import { Image } from "@projects/domain";
 import { IsArray, IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateUserDto {
