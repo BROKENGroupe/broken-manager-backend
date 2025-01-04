@@ -1,1 +1,1 @@
-export * from './image.interface'
+export * from '../../../../common/interfaces/image.interface'

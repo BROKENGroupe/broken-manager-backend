@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Image } from '../../../domain/models/image.interface';
+import { Image } from '@common/interfaces';
+import { ImageSchema } from '@common/schemas';
 
 @Schema()
 export class Project extends Document{
@@ -31,14 +32,7 @@ export class Project extends Document{
 
   @Prop([
     {
-      image: {
-        src: { type: String },
-        height: { type: Number },
-        width: { type: Number },
-        blurDataURL: { type: String },
-        blurWidth: { type: Number },
-        blurHeight: { type: Number },
-      },
+      image: ImageSchema,
       label: { type: String },
       value: { type: String },
     },

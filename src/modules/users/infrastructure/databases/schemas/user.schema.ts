@@ -1,15 +1,7 @@
-import { Image } from '@projects/domain';
+import { Image } from '@common/interfaces';
+import { ImageSchema } from '@common/schemas';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-
-const ImageSchema = new mongoose.Schema({
-    src: { type: String },
-    height: { type: Number },
-    width: { type: Number },
-    blurDataURL: { type: String },
-    blurWidth: { type: Number },
-    blurHeight: { type: Number },
-});
 
 @Schema()
 export class User extends Document {

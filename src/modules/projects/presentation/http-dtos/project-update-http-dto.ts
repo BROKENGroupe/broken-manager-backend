@@ -1,5 +1,5 @@
 import { IsNotEmpty, isNotEmpty, IsOptional, IsString } from "class-validator";
-import { Image } from "../../domain/models/image.interface";
+import { Image } from "../../../../common/interfaces/image.interface";
 
 export class UpdateProjectDto {
     @IsOptional()

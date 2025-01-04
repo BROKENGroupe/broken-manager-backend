@@ -1,4 +1,4 @@
-import { Image } from '../models/image.interface'; 
+import { Image } from '../../../../common/interfaces/image.interface'; 
 
 export class ProjectEntity {
   public readonly id?: string;

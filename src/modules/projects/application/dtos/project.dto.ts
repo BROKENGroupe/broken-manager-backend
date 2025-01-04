@@ -1,4 +1,4 @@
-import { Image } from "../../domain/models/image.interface";
+import { Image } from "../../../../common/interfaces/image.interface";
 
 export interface ProjectDto{
     id?: string;
