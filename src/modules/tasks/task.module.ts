@@ -3,7 +3,7 @@ import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MongoDBRespositoryImpl } from '@tasks/infraestructure';
+import { MongoDBRespositoryImpl, TaskRepositoryProvider } from '@tasks/infraestructure';
 import { TaskController } from '@tasks/presentation';
 import { TaskRepository } from '@tasks/domain';
 import { Task, TaskSchema } from '@tasks/infraestructure';
@@ -21,11 +21,7 @@ import { UseCaseTaskService } from '@tasks/application';
     ],
     providers: [
         UseCaseTaskService,
-        MongoDBRespositoryImpl,
-        {
-            provide: TaskRepository,
-            useExisting: MongoDBRespositoryImpl
-        },
+        TaskRepositoryProvider,
         {
             provide: APP_FILTER,
             useClass: GlobalExceptionFilter

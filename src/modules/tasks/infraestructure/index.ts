@@ -1,2 +1,2 @@
 export * from './database'
-export * from './mogodb.repositoryImpl'
+export * from './providers'

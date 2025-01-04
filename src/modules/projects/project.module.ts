@@ -8,6 +8,8 @@ import { UseCaseService } from '@projects/application';
 import { DatabaseModule } from '@database/database.module';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from '@common/handler';
+import { ProjectRepositoryProvider } from './infrastructure/providers/project-repository.provider';
+import { TOKEN_REPOSITORY_DB } from './domain/repositories/token-repository';
 
 @Module({
   imports: [
@@ -21,11 +23,7 @@ import { GlobalExceptionFilter } from '@common/handler';
   ],
   providers: [
     UseCaseService,
-    MongoDBRespositoryImpl,
-    {
-      provide: ProjectRepository,
-      useExisting: MongoDBRespositoryImpl
-    },
+    ProjectRepositoryProvider,
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter

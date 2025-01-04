@@ -1,11 +1,11 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
-import { UserRepository } from "../domain/repositories/user.repository";
-import { User } from "./databases/schemas/user.schema";
-import { UserEntity } from "../domain/entities/user.entity";
-import { CreateUserDto } from "../presentation/dtos/create-user.http.dto";
+import { UserRepository } from "../../domain/repositories/user.repository";
+import { User } from "./schemas/user.schema";
+import { UserEntity } from "../../domain/entities/user.entity";
+import { CreateUserDto } from "../../presentation/dtos/create-user.http.dto";
 import { hash } from 'bcrypt'
-import { UpdateUserDto } from "../presentation/dtos/update-user.http.dto";
+import { UpdateUserDto } from "../../presentation/dtos/update-user.http.dto";
 import { HttpException } from "@nestjs/common";
 import { successResponseDto } from "@common/handler/http/http-response.dto";
 import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";

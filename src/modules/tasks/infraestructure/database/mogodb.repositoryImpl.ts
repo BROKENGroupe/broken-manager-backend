@@ -5,7 +5,7 @@ import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-consta
 import { successResponseDto } from "@common/handler/http";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
 import { CreateTaskDto } from "@tasks/presentation";
-import { Task } from "./database";
+import { Task } from ".";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends TaskRepository {

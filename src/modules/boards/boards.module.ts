@@ -3,10 +3,10 @@ import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Board, BoardSchema, MongoDBRespositoryImpl } from '@boards/infraestructure';
+import { Board, BoardSchema } from '@boards/infraestructure';
 import { BoardController } from '@boards/presentation';
 import { UseCaseBoardService } from '@boards/application';
-import { BoardRepository } from '@boards/domain/repositories';
+import { BoardRepositoryProvider } from '@boards/infraestructure';
 
 @Module({
     imports: [
@@ -20,11 +20,7 @@ import { BoardRepository } from '@boards/domain/repositories';
     ],
     providers: [
         UseCaseBoardService,
-        MongoDBRespositoryImpl,
-        {
-            provide: BoardRepository,
-            useExisting: MongoDBRespositoryImpl
-        },
+        BoardRepositoryProvider,        
         {
             provide: APP_FILTER,
             useClass: GlobalExceptionFilter

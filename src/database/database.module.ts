@@ -2,6 +2,7 @@ import { Module, DynamicModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import config from './config';
+import { TypeDatabase } from '@database/models';
 
 @Module({})
 export class DatabaseModule {
@@ -14,10 +15,10 @@ export class DatabaseModule {
 
   private static async getDatabaseModule(): Promise<DynamicModule> {
     const configService = new ConfigService();
-    const databaseType = configService.get<string>('database.type', 'mongodb'); // Usa la configuración cargada
+    const databaseType = configService.get<string>('database.type', TypeDatabase.MONGODB);
 
     switch (databaseType) {
-      case 'mongodb':
+      case TypeDatabase.MONGODB:
         return {
           module: DatabaseModule,
           imports: [

@@ -1,12 +1,12 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
-import { ProjectEntity } from "../../domain/entities/project.entity";
-import { ProjectRepository } from "../../domain/repositories/project.repository";
+import { ProjectEntity } from "@projects/domain";
+import { ProjectRepository } from "@projects/domain";
 import { Project } from "./schemas/projects.schema";
 import { HttpException, Injectable } from "@nestjs/common";
-import { CreateProjectDto } from "../../presentation/http-dtos/project-create-http-dto";
-import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
-import { successResponseDto } from "@common/handler/http/http-response.dto";
+import { CreateProjectDto } from "@projects/presentation";
+import { HttpErrors, HttpSuccess } from "@common/handler";
+import { successResponseDto } from "@common/handler";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends ProjectRepository {

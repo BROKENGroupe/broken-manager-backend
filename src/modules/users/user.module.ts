@@ -3,9 +3,9 @@ import { Module } from '@nestjs/common';
 import { UserController } from '@users/presentation';
 import { UsesCaseUserService } from '@users/appplication';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserRepository } from '@users/domain';
 import { DatabaseModule } from '@database/database.module';
-import { MongoDBRespositoryImpl, User, UserSchema } from '@users/infrastructure';
+import { User, UserSchema } from '@users/infrastructure';
+import { UserRepositoryProvider } from '@users/infrastructure';
 
 @Module({
     imports: [
@@ -17,11 +17,7 @@ import { MongoDBRespositoryImpl, User, UserSchema } from '@users/infrastructure'
     controllers: [UserController],
     providers: [
         UsesCaseUserService,
-        MongoDBRespositoryImpl,
-        {
-            provide: UserRepository,
-            useExisting: MongoDBRespositoryImpl
-        }
+        UserRepositoryProvider
     ],
     exports: [UsesCaseUserService]
 })
