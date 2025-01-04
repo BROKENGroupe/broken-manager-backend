@@ -3,7 +3,7 @@ import { isValidObjectId, Model, Types } from "mongoose";
 import { ProjectEntity } from "../../domain/entities/project.entity";
 import { ProjectRepository } from "../../domain/repositories/project.repository";
 import { Project } from "./schemas/projects.schema";
-import {HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { CreateProjectDto } from "../../presentation/http-dtos/project-create-http-dto";
 import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
 import { successResponseDto } from "@common/handler/http/http-response.dto";
@@ -86,7 +86,7 @@ export class MongoDBRespositoryImpl extends ProjectRepository {
             throw new HttpException(HttpErrors.NOT_FOUND, 400)
         }
 
-        const respo:successResponseDto  = {
+        const respo: successResponseDto = {
             success: true,
             message: HttpSuccess.DELETE.message,
             statusCode: 201,
