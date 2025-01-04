@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Param, Get, Put, Delete } from '@nestjs/common';
-import { CreateBoardDto, UpdateBoardDto } from '@boards/presentation';
 import { UseCaseTaskService } from '@tasks/application';
 import { TaskEntity } from '@tasks/domain';
 import { successResponseDto } from '@common/handlers';
+import { CreateTaskDto, UpdateTaskDto } from '@tasks/presentation';
 
 @Controller('tasks')
 export class TaskController {
@@ -11,29 +11,29 @@ export class TaskController {
   ) { }
 
   @Get('all')
-  async getBoardAll(): Promise<TaskEntity[]> {
+  async getTaskAll(): Promise<TaskEntity[]> {
     return await this.useCaseService.findAll();
   }
 
   @Get(':id')
-  async getBoardById(@Param('id') id: string): Promise<TaskEntity | []> {
+  async getTaskById(@Param('id') id: string): Promise<TaskEntity | []> {
     return await this.useCaseService.findById(id);
   }
 
   @Post('create')
-  async createBoard(@Body() Board: CreateBoardDto): Promise<TaskEntity> {
-    return this.useCaseService.create(Board);
+  async createTask(@Body() task: CreateTaskDto): Promise<TaskEntity> {
+    return this.useCaseService.create(task);
   }
 
   @Put('update/:id')
-  async updateBoard(
+  async updateTask(
     @Param('id') id: string,
-    @Body() Board: UpdateBoardDto): Promise<TaskEntity> {
-    return this.useCaseService.update(id, Board);
+    @Body() task: UpdateTaskDto): Promise<TaskEntity> {
+    return this.useCaseService.update(id, task);
   }
 
   @Delete('delete/:id')
-  async deleteBoard(@Param('id') id: string): Promise<successResponseDto> {
+  async deleteTask(@Param('id') id: string): Promise<successResponseDto> {
     return this.useCaseService.delete(id);
   }
 }

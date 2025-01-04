@@ -11,10 +11,10 @@ export class Task {
   @Prop()
   id?: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   boardId: string;  
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   title: string;
 
   @Prop()
@@ -31,8 +31,8 @@ export class Task {
 
   @Prop([
     {
-      name: { type: String, required: true },
-      image: { type: ImageSchema, required: true },
+      name: { type: String, required: false },
+      image: { type: ImageSchema, required: false },
     },
   ])
   assign: Array<{ name: string; image: Image }>;
@@ -60,8 +60,8 @@ export class Task {
 
   @Prop([
     {
-      id: { type: String, required: true },
-      title: { type: String, required: true },
+      id: { type: String, required: false },
+      title: { type: String, required: false },
     },
   ])
   list: Array<{ id: string; title: string }>;
