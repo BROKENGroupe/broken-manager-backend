@@ -1,12 +1,12 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
 import {HttpException, Injectable } from "@nestjs/common";
-import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
-import { successResponseDto } from "@common/handler/http";
-import { Board } from "./schemas";
+import { HttpErrors, HttpSuccess } from "@common/handlers/http";
+import { successResponseDto } from "@common/handlers/http";
 import { BoardEntity } from "@boards/domain";
 import { CreateBoardDto } from "@boards/presentation";
 import { BoardRepository } from "@boards/domain/repositories";
+import { Board } from "./schemas";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends BoardRepository {

@@ -3,7 +3,7 @@ import { CreateUserDto } from './dtos/create-user.http.dto';
 import { UsesCaseUserService } from '../appplication/uses-case-user.service';
 import { UserEntity } from '../domain/entities/user.entity';
 import { UpdateUserDto } from './dtos/update-user.http.dto';
-import { successResponseDto } from '@common/handler/http/http-response.dto';
+import { successResponseDto } from '@common/handlers';
 
 @Controller('users')
 export class UserController {

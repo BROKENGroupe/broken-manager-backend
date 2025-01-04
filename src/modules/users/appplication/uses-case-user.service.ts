@@ -1,9 +1,8 @@
+import { successResponseDto } from '@common/handlers';
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../domain/repositories/user.repository';
-import { UserEntity } from '../domain/entities/user.entity';
-import { CreateUserDto } from '../presentation/dtos/create-user.http.dto';
-import { UpdateUserDto } from '../presentation/dtos/update-user.http.dto';
-import { successResponseDto } from '@common/handler/http/http-response.dto';
+import { UserEntity, UserRepository } from '@users/domain';
+import { CreateUserDto, UpdateUserDto } from '@users/presentation';
+
 
 @Injectable()
 export class UsesCaseUserService {

@@ -1,11 +1,8 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { AuthEntity } from "../../domain/entities/auth.entity";
-import { AuthRepository } from "../../domain/repositories/auth.repository";
-import { AuthSignInDto } from "../../presentation/http-dtos/auth-signin-http.dto";
-import { AuthSignUpDto } from "../../presentation/http-dtos/auth.singup-http.dto";
-import { AuthJwtService } from "./auth-jwt.service";
-import { UserLogin } from "../../domain/entities/user-login.entity";
-import { HttpErrors } from "@common/handler/http/http-errors-constants";
+import { HttpErrors } from "@common/handlers/http";
+import { AuthSignInDto, AuthSignUpDto } from "@auth/presentation";
+import { AuthEntity, AuthRepository, UserLogin } from "@auth/domain";
+import { AuthJwtService } from "@auth/infrastructure";
 
 @Injectable()
 export class AuthJwtRepositoryImpl extends AuthRepository {

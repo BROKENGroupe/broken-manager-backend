@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Param, Get, Put, Delete } from '@nestjs/common';
-import { successResponseDto } from '@common/handler/http';
 import { CreateBoardDto, UpdateBoardDto } from '@boards/presentation';
 import { UseCaseTaskService } from '@tasks/application';
 import { TaskEntity } from '@tasks/domain';
+import { successResponseDto } from '@common/handlers';
 
 @Controller('tasks')
 export class TaskController {

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { successResponseDto } from '@common/handler/http';
+import { successResponseDto } from '@common/handlers/http';
 import { BoardEntity } from '@boards/domain';
 import { CreateBoardDto, UpdateBoardDto } from '@boards/presentation';
 import { BoardRepository } from '@boards/domain/repositories';

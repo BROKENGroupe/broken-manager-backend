@@ -1,4 +1,4 @@
-import { successResponseDto } from '@common/handler/http/http-response.dto';
+import { successResponseDto } from '@common/handlers/http';
 import { BoardEntity } from '@boards/domain';
 import { CreateBoardDto, UpdateBoardDto } from '@boards/presentation';
 

@@ -1,7 +1,7 @@
-import { Body, Controller, HttpException, Post, UnauthorizedException } from '@nestjs/common';
-import { UserLogin } from '../domain/entities/user-login.entity';
-import { AuthUseCaseService } from '../application/use-cases/auth.uses-case.service';
-import { AuthSignInDto } from './http-dtos/auth-signin-http.dto';
+import { AuthUseCaseService } from '@auth/application';
+import { Body, Controller, Post } from '@nestjs/common';
+import { AuthSignInDto } from '@auth/presentation';
+import { UserLogin } from '@auth/domain';
 
 @Controller('auth')
 export class AuthController {

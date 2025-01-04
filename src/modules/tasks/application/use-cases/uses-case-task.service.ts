@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { successResponseDto } from '@common/handler/http';
+import { successResponseDto } from '@common/handlers/http';
 import { TaskEntity, TaskRepository } from '@tasks/domain';
 import { CreateTaskDto, UpdateTaskDto } from '@tasks/presentation';
 

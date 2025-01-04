@@ -7,9 +7,8 @@ import { Project, ProjectSchema } from '@projects/infrastructure';
 import { UseCaseService } from '@projects/application';
 import { DatabaseModule } from '@database/database.module';
 import { APP_FILTER } from '@nestjs/core';
-import { GlobalExceptionFilter } from '@common/handler';
-import { ProjectRepositoryProvider } from './infrastructure/providers/project-repository.provider';
-import { TOKEN_REPOSITORY_DB } from './domain/repositories/token-repository';
+import { GlobalExceptionFilter } from '@common/handlers';
+import { ProjectRepositoryProvider } from '@projects/infrastructure';
 
 @Module({
   imports: [

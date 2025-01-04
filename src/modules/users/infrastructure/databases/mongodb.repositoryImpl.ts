@@ -7,8 +7,7 @@ import { CreateUserDto } from "../../presentation/dtos/create-user.http.dto";
 import { hash } from 'bcrypt'
 import { UpdateUserDto } from "../../presentation/dtos/update-user.http.dto";
 import { HttpException } from "@nestjs/common";
-import { successResponseDto } from "@common/handler/http/http-response.dto";
-import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
+import { HttpErrors, HttpSuccess, successResponseDto } from "@common/handlers";
 
 export class MongoDBRespositoryImpl implements UserRepository {
 

@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Image } from '@common/interfaces';
 import { Document } from 'mongoose';
-import { ImageSchema } from '@common/schemas';
+import { ImageSchema } from '@database/mongodb';
 
 export type TaskDocument = Task & Document;
 

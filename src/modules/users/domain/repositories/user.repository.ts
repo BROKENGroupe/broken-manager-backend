@@ -1,7 +1,7 @@
-import { successResponseDto } from "@common/handler/http/http-response.dto";
-import { CreateUserDto } from "../../presentation/dtos/create-user.http.dto";
-import { UpdateUserDto } from "../../presentation/dtos/update-user.http.dto";
-import { UserEntity } from "../entities/user.entity";
+import { CreateUserDto, UpdateUserDto } from "@users/presentation";
+import { UserEntity } from "@users/domain";
+import { successResponseDto } from "@common/handlers";
+
 
 export abstract class UserRepository {
     abstract findByEmail(email: string): Promise<UserEntity>;

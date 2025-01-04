@@ -5,8 +5,8 @@ import { ProjectRepository } from "@projects/domain";
 import { Project } from "./schemas/projects.schema";
 import { HttpException, Injectable } from "@nestjs/common";
 import { CreateProjectDto } from "@projects/presentation";
-import { HttpErrors, HttpSuccess } from "@common/handler";
-import { successResponseDto } from "@common/handler";
+import { HttpErrors, HttpSuccess } from "@common/handlers";
+import { successResponseDto } from "@common/handlers";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends ProjectRepository {

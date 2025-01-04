@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { Image } from '@common/interfaces';
-import { ImageSchema } from '@common/schemas';
+import { ImageSchema } from '@database/mongodb';
 
 @Schema()
 export class Project extends Document{

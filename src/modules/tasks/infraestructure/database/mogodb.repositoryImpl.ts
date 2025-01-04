@@ -1,11 +1,10 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
 import {HttpException, Injectable } from "@nestjs/common";
-import { HttpErrors, HttpSuccess } from "@common/handler/http/http-errors-constants";
-import { successResponseDto } from "@common/handler/http";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
 import { CreateTaskDto } from "@tasks/presentation";
 import { Task } from ".";
+import { HttpErrors, HttpSuccess, successResponseDto } from "@common/handlers";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends TaskRepository {

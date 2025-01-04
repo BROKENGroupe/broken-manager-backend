@@ -1,9 +1,8 @@
+import { successResponseDto } from '@common/handlers';
 import { Injectable } from '@nestjs/common';
-import { CreateProjectDto } from '../../presentation/http-dtos/project-create-http-dto';
-import { ProjectEntity } from '../../domain/entities/project.entity';
-import { ProjectRepository } from '../../domain/repositories/project.repository';
-import { UpdateProjectDto } from '../../presentation/http-dtos/project-update-http-dto';
-import { successResponseDto } from '@common/handler/http/http-response.dto';
+import { ProjectRepository, ProjectEntity } from '@projects/domain';
+import { CreateProjectDto, UpdateProjectDto } from '@projects/presentation';
+
 
 @Injectable()
 export class UseCaseService {

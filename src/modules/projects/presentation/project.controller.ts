@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Param, Get, Put, Delete } from '@nestjs/common';
-import { successResponseDto } from '@common/handler/http';
+import { successResponseDto } from '@common/handlers/http';
 import { UseCaseService } from '@projects/application';
 import { ProjectEntity } from '@projects/domain';
 import { CreateProjectDto, UpdateProjectDto } from '@projects/presentation';

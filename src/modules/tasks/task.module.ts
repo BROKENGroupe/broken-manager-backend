@@ -1,4 +1,4 @@
-import { GlobalExceptionFilter } from '@common/handler';
+import { GlobalExceptionFilter } from '@common/handlers';
 import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';

@@ -1,6 +1,7 @@
-import { successResponseDto } from '@common/handler/http';
-import { CreateTaskDto, UpdateTaskDto } from '@tasks/presentation';
-import { TaskEntity } from '../entities';
+import { successResponseDto } from "@common/handlers";
+import { CreateTaskDto, UpdateTaskDto } from "@tasks/presentation";
+import { TaskEntity } from "@tasks/domain";
+
 
 export abstract class TaskRepository {
   abstract save(project: CreateTaskDto): Promise<TaskEntity>;

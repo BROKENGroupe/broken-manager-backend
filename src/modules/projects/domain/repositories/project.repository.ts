@@ -1,7 +1,6 @@
-import { successResponseDto } from '@common/handler/http/http-response.dto';
-import { CreateProjectDto } from '../../presentation/http-dtos/project-create-http-dto';
-import { UpdateProjectDto } from '../../presentation/http-dtos/project-update-http-dto';
-import { ProjectEntity } from '../entities/project.entity';
+import { successResponseDto } from '@common/handlers/http';
+import { CreateProjectDto, UpdateProjectDto } from '@projects/presentation';
+import { ProjectEntity } from '@projects/domain';
 
 export abstract class ProjectRepository {
   abstract save(project: CreateProjectDto): Promise<ProjectEntity>;
