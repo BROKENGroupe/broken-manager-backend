@@ -12,6 +12,10 @@ export class CreateBoardDto {
     @IsNotEmpty()
     @IsString()
     readonly status: string; 
+
+    @IsNotEmpty()
+    @IsString()
+    readonly projectId: string; 
 }
 
 

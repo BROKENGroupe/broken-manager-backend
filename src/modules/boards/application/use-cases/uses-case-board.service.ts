@@ -17,6 +17,10 @@ export class UseCaseBoardService {
     return this.boardRepository.findById(id);
   }
 
+  async findAllById(id: string): Promise<BoardEntity[] | []> {
+    return this.boardRepository.findAllById(id);
+  }
+
   async create(boardDto: CreateBoardDto): Promise<BoardEntity> {
     return this.boardRepository.save(boardDto);
   }

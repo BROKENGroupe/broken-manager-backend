@@ -13,6 +13,9 @@ export class Board extends Document{
   @Prop({ default: 'in progress' })
   status: string;
 
+  @Prop()
+  projectId: string;
+
   @Prop({ default: new Date().toISOString() })
   createdAt: string;
 

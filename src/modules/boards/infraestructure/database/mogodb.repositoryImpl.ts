@@ -1,6 +1,6 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
-import {HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { HttpErrors, HttpSuccess } from "@common/handlers/http";
 import { successResponseDto } from "@common/handlers/http";
 import { BoardEntity } from "@boards/domain";
@@ -18,6 +18,18 @@ export class MongoDBRespositoryImpl extends BoardRepository {
 
     async findAll(): Promise<BoardEntity[]> {
         const result = await this.boardModel.find().exec()
+        if (!result) {
+            throw new HttpException('No se encontraron registros', 404)
+        }
+
+        return result
+    }
+
+    async findAllById(id: string): Promise<BoardEntity[] | []> {
+        const result = await this.boardModel.find({
+            projectId: { $in: [id] }
+        }).exec();
+
         if (!result) {
             throw new HttpException('No se encontraron registros', 404)
         }
@@ -86,7 +98,7 @@ export class MongoDBRespositoryImpl extends BoardRepository {
             throw new HttpException(HttpErrors.NOT_FOUND, 400)
         }
 
-        const respo:successResponseDto  = {
+        const respo: successResponseDto = {
             success: true,
             message: HttpSuccess.DELETE.message,
             statusCode: 201,

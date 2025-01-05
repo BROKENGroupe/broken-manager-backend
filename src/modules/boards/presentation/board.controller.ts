@@ -20,6 +20,11 @@ export class BoardController {
     return await this.useCaseService.findById(id);
   }
 
+  @Get('all/:id')
+  async getBoardsById(@Param('id') id: string): Promise<BoardEntity[] | []> {
+    return await this.useCaseService.findAllById(id);
+  }
+
   @Post('create')
   async createBoard(@Body() Board: CreateBoardDto): Promise<BoardEntity> {
     return this.useCaseService.create(Board);

@@ -9,7 +9,7 @@ export class ProjectEntity {
   public readonly priority: string;
   public readonly description: string;
   public readonly percentage: number;
-  public readonly assign: Array<{ image: Image; label: string; value: string }>;
+  public readonly assign: Array<{ image: string; label: string; value: string }>;
   public readonly assignDate: string;
   public readonly dueDate: string;
   public readonly isFavorite: boolean;

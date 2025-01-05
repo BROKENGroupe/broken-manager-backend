@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { Image } from '@common/interfaces';
 import { ImageSchema } from '@database/mongodb';
+import { string } from 'joi';
 
 @Schema()
 export class Project extends Document{
@@ -32,12 +33,12 @@ export class Project extends Document{
 
   @Prop([
     {
-      image: ImageSchema,
+      image: { type: String },
       label: { type: String },
       value: { type: String },
     },
   ])
-  assign: Array<{ image: Image; label: string; value: string }>;
+  assign: Array<{ image: string; label: string; value: string }>;
 
   @Prop({ default: new Date().toISOString() })
   assignDate: string;
