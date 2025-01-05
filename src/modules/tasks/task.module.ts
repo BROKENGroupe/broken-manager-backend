@@ -3,32 +3,38 @@ import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MongoDBRespositoryImpl, TaskRepositoryProvider } from '@tasks/infraestructure';
-import { TaskController } from '@tasks/presentation';
-import { TaskRepository } from '@tasks/domain';
+import { SubTask, SubTaskRepositoryProvider, SubTaskSchema, TaskRepositoryProvider } from '@tasks/infraestructure';
+import { CommentController, TaskController } from '@tasks/presentation';
 import { Task, TaskSchema } from '@tasks/infraestructure';
-import { UseCaseTaskService } from '@tasks/application';
+import { UseCaseSubTaskService, UseCaseTaskService } from '@tasks/application';
+import { SubTaskController } from './presentation/subtask.controller';
 
 @Module({
     imports: [
         MongooseModule.forFeature([
-            { name: Task.name, schema: TaskSchema }
+            { name: Task.name, schema: TaskSchema },
+            { name: SubTask.name, schema: SubTaskSchema }
         ]),
         DatabaseModule.forRoot()
     ],
     controllers: [
-        TaskController
+        TaskController,
+        SubTaskController,
+        CommentController
     ],
     providers: [
         UseCaseTaskService,
+        UseCaseSubTaskService,
         TaskRepositoryProvider,
+        SubTaskRepositoryProvider,
         {
             provide: APP_FILTER,
             useClass: GlobalExceptionFilter
         }
     ],
     exports: [
-        UseCaseTaskService
+        UseCaseTaskService,
+        UseCaseSubTaskService
     ]
 })
 export class TaskModule { }

@@ -1,2 +1,4 @@
 export * from './task-create.http-dto'
 export * from './task-update.http-dto'
+export * from './subtask-create.http-dto'
+export * from './subtask-update.http-dto'
