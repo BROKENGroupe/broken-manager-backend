@@ -3,8 +3,8 @@ import { isValidObjectId, Model, Types } from "mongoose";
 import {HttpException, Injectable } from "@nestjs/common";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
 import { CreateTaskDto } from "@tasks/presentation";
-import { Task } from ".";
 import { HttpErrors, HttpSuccess, successResponseDto } from "@common/handlers";
+import { Task } from "./schemas";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends TaskRepository {
@@ -16,6 +16,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
 
     async findAll(): Promise<TaskEntity[]> {
         const result = await this.TaskModel.find().exec()
+        
         if (!result) {
             throw new HttpException('No se encontraron registros', 404)
         }
