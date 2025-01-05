@@ -12,7 +12,7 @@ export class Task {
   id?: string;
 
   @Prop({ required: false })
-  boardId: string;  
+  boardId: string;
 
   @Prop({ required: false })
   title: string;
@@ -31,11 +31,12 @@ export class Task {
 
   @Prop([
     {
-      name: { type: String, required: false },
+      username: { type: String, required: false },
       image: { type: ImageSchema, required: false },
+      _id: false
     },
   ])
-  assign: Array<{ name: string; image: Image }>;
+  assign: Array<{ username: string; image: Image }>;
 
   @Prop({ type: ImageSchema })
   image: Image;

@@ -1,8 +1,8 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types } from "mongoose";
-import {HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
-import { CreateTaskDto } from "@tasks/presentation";
+import { CreateTaskDto, UpdateTaskDto } from "@tasks/presentation";
 import { HttpErrors, HttpSuccess, successResponseDto } from "@common/handlers";
 import { Task } from "./schemas";
 
@@ -16,12 +16,12 @@ export class MongoDBRespositoryImpl extends TaskRepository {
 
     async findAll(): Promise<TaskEntity[]> {
         const result = await this.TaskModel.find().exec()
-        
+
         if (!result) {
             throw new HttpException('No se encontraron registros', 404)
         }
 
-        return result
+        return result ?? []
     }
 
     async findById(id: string): Promise<TaskEntity | []> {
@@ -46,7 +46,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
         return await newtask.save()
     }
 
-    async update(id: string, taskDto: CreateTaskDto): Promise<TaskEntity | null> {
+    async update(id: string, taskDto: UpdateTaskDto): Promise<TaskEntity | null> {
 
         if (!isValidObjectId(id)) {
             throw new HttpException(HttpErrors.BAD_REQUEST, 400)
@@ -59,10 +59,14 @@ export class MongoDBRespositoryImpl extends TaskRepository {
             throw new HttpException(HttpErrors.NOT_FOUND, 400)
         }
 
-        const result = await this.TaskModel.findByIdAndUpdate(id, taskDto, {
-            new: true,
-            runValidators: true
-        })
+        const result = await this.TaskModel.findByIdAndUpdate(id,            
+            {
+                $addToSet: { assign: taskDto.assign }
+            },
+            {
+                new: true,
+                runValidators: true
+            })
         return result ?? null
     }
 
@@ -85,7 +89,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
             throw new HttpException(HttpErrors.NOT_FOUND, 400)
         }
 
-        const respo:successResponseDto  = {
+        const respo: successResponseDto = {
             success: true,
             message: HttpSuccess.DELETE.message,
             statusCode: 201,

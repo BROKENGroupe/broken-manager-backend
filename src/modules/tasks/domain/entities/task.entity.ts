@@ -8,7 +8,7 @@ export class TaskEntity {
   public readonly status: string;
   public readonly tags: string[];
   public readonly priority: string;
-  public readonly assign: Array<{ name: string; image: Image }>;
+  public readonly assign: Array<{ username: string; image: Image }>;
   public readonly image?: Image;
   public readonly category?: string;
   public readonly pages?: string;

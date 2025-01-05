@@ -37,7 +37,7 @@ export class CreateTaskDto {
 
     @IsOptional()
     @IsArray()
-    assign?: Array<{ name: string; image: Image }>;
+    assign?: Array<{ username: string; image: Image }>;
 
 
     @IsOptional()
