@@ -1,5 +1,0 @@
-export * from './appplication'
-export * from './domain'
-export * from './infrastructure'
-export * from './presentation'
-export * from './user.module'

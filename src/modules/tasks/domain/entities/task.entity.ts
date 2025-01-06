@@ -8,6 +8,7 @@ export class TaskEntity {
   public readonly status: string;
   public readonly tags: string[];
   public readonly priority: string;
+  public readonly percentage: number;
   public readonly assign: Array<{ username: string; image: Image }>;
   public readonly image?: Image;
   public readonly category?: string;
@@ -28,6 +29,7 @@ export class TaskEntity {
     status = 'inprogress',
     tags = [],
     priority = 'low',
+    percentage,
     assign = [],
     image,
     category,
@@ -47,6 +49,7 @@ export class TaskEntity {
     this.status = status;
     this.tags = tags;
     this.priority = priority;
+    this.percentage = percentage;
     this.assign = assign;
     this.image = image;
     this.category = category;

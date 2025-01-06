@@ -1,5 +1,5 @@
 import { Image } from "@projects/domain";
-import { IsArray, IsIn, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsIn, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class UpdateTaskDto {
         @IsOptional()
@@ -20,6 +20,10 @@ export class UpdateTaskDto {
         @IsOptional()
         @IsIn(['todo', 'inprogress', 'done'])
         status?: string;
+
+        @IsOptional()
+        @IsNumber()
+        percentage?: number;
 
         @IsOptional()
         @IsArray()

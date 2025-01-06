@@ -1,5 +1,5 @@
 import { Image } from '@projects/domain';
-import { IsString, IsOptional, IsArray, IsIn } from 'class-validator';
+import { IsString, IsOptional, IsArray, IsIn, IsNumber } from 'class-validator';
 
 export class CreateTaskDto {
     @IsOptional()
@@ -33,6 +33,10 @@ export class CreateTaskDto {
     @IsOptional()
     @IsIn(['low', 'medium', 'high'])
     priority?: string;
+
+    @IsOptional()
+    @IsNumber()
+    percentage?: number;
 
 
     @IsOptional()

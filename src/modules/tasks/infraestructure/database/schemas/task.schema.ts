@@ -45,6 +45,9 @@ export class Task {
   category: string;
 
   @Prop()
+  percentage: number;
+
+  @Prop()
   pages: string;
 
   @Prop()
