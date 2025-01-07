@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { enviroments } from '@enviroments/enviroments';
+import * as Joi from 'joi';
 import config from '@database/config';
 import { ProjectModule } from '@projects/project.module';
 import { UserModule } from '@users/user.module';
 import { AuthModule } from '@auth/auth.module';
 import { TaskModule } from '@tasks/task.module';
 import { BoardsModule } from '@boards/boards.module';
-import * as Joi from 'joi';
+import { StorageModule } from '@storages/storage.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import * as Joi from 'joi';
     UserModule,
     AuthModule,
     BoardsModule,
-    TaskModule, 
+    TaskModule,
+    StorageModule, 
   ],
   controllers: [],
   providers: [],

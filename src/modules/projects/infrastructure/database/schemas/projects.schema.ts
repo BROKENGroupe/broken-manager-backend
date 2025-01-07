@@ -33,12 +33,12 @@ export class Project extends Document{
 
   @Prop([
     {
-      image: { type: String },
-      label: { type: String },
-      value: { type: String },
+      username: { type: String, required: false },
+      image: { type: ImageSchema, required: false },
+      _id: false
     },
   ])
-  assign: Array<{ image: string; label: string; value: string }>;
+  assign: Array<{ username: string; image: Image }>;
 
   @Prop({ default: new Date().toISOString() })
   assignDate: string;

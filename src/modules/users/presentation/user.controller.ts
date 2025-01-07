@@ -11,9 +11,9 @@ export class UserController {
   constructor(private readonly usesCaseUserService: UsesCaseUserService) { }
 
   @Get('all')
-  async getUusersAll(): Promise<UserEntity[]> {
+  async getUsersAll(): Promise<UserEntity[]> {
     return this.usesCaseUserService.findAll();
-  }
+  }  
 
   @Post('create')
   async createUser(@Body() user: CreateUserDto): Promise<UserEntity> {

@@ -59,9 +59,21 @@ export class MongoDBRespositoryImpl extends TaskRepository {
             throw new HttpException(HttpErrors.NOT_FOUND, 400)
         }
 
-        const result = await this.TaskModel.findByIdAndUpdate(id,            
+        const result = await this.TaskModel.findByIdAndUpdate(id,
             {
-                $addToSet: { assign: taskDto.assign }
+                $addToSet: {
+                    assign: taskDto.assign,
+                    list: taskDto.list,
+                    tags: taskDto.tags
+                },
+                $set: {
+                    title: taskDto.title,
+                    desc: taskDto.desc,
+                    status: taskDto.status,
+                    updatedAt: new Date().toISOString(),
+                    date: taskDto.date,
+                    priority: taskDto.priority,
+                }
             },
             {
                 new: true,

@@ -1,4 +1,4 @@
-import { IsNotEmpty, isNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, isNotEmpty, IsOptional, IsString } from "class-validator";
 import { Image } from "../../../../common/interfaces/image.interface";
 
 export class UpdateProjectDto {
@@ -34,7 +34,9 @@ export class UpdateProjectDto {
     readonly percentage?: number;
 
 
-    readonly assign?: Array<{ image: string; label: string; value: string }>;
+    @IsOptional()
+    @IsArray()
+    assign?: Array<{ username: string; image: Image }>;
 
 
     @IsString()

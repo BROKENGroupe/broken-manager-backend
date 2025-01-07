@@ -7,13 +7,25 @@ import { HttpException, Injectable } from "@nestjs/common";
 import { CreateProjectDto } from "@projects/presentation";
 import { HttpErrors, HttpSuccess } from "@common/handlers";
 import { successResponseDto } from "@common/handlers";
+import { UserEntity } from "@users/domain";
+import { MemberEntity } from "@projects/domain/entities";
 
 @Injectable()
 export class MongoDBRespositoryImpl extends ProjectRepository {
-
+    
     constructor(@InjectModel(Project.name)
     private readonly projectModel: Model<Project>) {
         super();
+    }
+    
+    async findMembersById(projectId: string): Promise<MemberEntity[] | []> {
+        const result = await this.projectModel.findById(projectId);
+
+        if (!result) {
+            throw new HttpException('No se encontraron registros', 404)
+        }
+
+        return result.assign ?? []
     }
 
     async findAll(): Promise<ProjectEntity[]> {

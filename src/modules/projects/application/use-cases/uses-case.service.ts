@@ -1,7 +1,9 @@
 import { successResponseDto } from '@common/handlers';
 import { Injectable } from '@nestjs/common';
 import { ProjectRepository, ProjectEntity } from '@projects/domain';
+import { MemberEntity } from '@projects/domain/entities';
 import { CreateProjectDto, UpdateProjectDto } from '@projects/presentation';
+import { UserEntity } from '@users/domain';
 
 
 @Injectable()
@@ -11,6 +13,10 @@ export class UseCaseService {
 
   async findAll(): Promise<ProjectEntity[]> {
     return this.projectRepository.findAll();
+  }
+
+  async findMembersById(id: string): Promise<MemberEntity[]> {
+    return this.projectRepository.findMembersById(id);
   }
 
   async findById(id: string): Promise<ProjectEntity | []> {

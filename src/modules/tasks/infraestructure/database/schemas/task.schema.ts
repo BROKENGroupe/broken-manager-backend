@@ -11,10 +11,10 @@ export class Task {
   @Prop()
   id?: string;
 
-  @Prop({ required: false })
+  @Prop()
   boardId: string;
 
-  @Prop({ required: false })
+  @Prop()
   title: string;
 
   @Prop()
