@@ -7,7 +7,7 @@ async function bootstrap() {
   const appOptions = {cors: true};
   const app = await NestFactory.create(appModule, appOptions);
   // Configura el filtro de excepciones como global
-  //app.useGlobalFilters(new GlobalExceptionFilter());
+  app.useGlobalFilters(new GlobalExceptionFilter());
   app.enableCors();
   app.setGlobalPrefix('api');
   await app.listen(3001);

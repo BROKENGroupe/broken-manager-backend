@@ -15,7 +15,7 @@ export class UsescaseStorageService {
         return await this.uploadRepository.delete(id);
     }
 
-    async update(id: string, file: Express.Multer.File): Promise<UpdateApiOptions>{
+    async update(id: string, file: Express.Multer.File): Promise<UploadApiResponse | UploadApiErrorResponse>{
         return await this.uploadRepository.update(id, file);
     }
 

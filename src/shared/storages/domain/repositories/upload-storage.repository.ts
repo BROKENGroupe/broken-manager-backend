@@ -3,5 +3,5 @@ import { DeleteApiResponse, UpdateApiOptions, UploadApiErrorResponse, UploadApiO
 export abstract class UploadStorageRepository {
   abstract upload(file: Express.Multer.File): Promise<UploadApiResponse | UploadApiErrorResponse>;
   abstract delete(id: string): Promise<DeleteApiResponse>;
-  abstract update(id: string, options: UpdateApiOptions): Promise<UpdateApiOptions>;
+  abstract update(id: string, options: UpdateApiOptions):  Promise<UploadApiResponse | UploadApiErrorResponse>;
 }

@@ -21,7 +21,7 @@ export class StorageController {
 
   @Put('update/:id')
   @UseInterceptors(FileInterceptor('file'))
-  async updateFile(@Param('id') id: string, @UploadedFile() file: Express.Multer.File): Promise<UpdateApiOptions> {
+  async updateFile(@Param('id') id: string, @UploadedFile() file: Express.Multer.File): Promise<UploadApiResponse | UploadApiErrorResponse> {
     return await this.uploadFileUseCase.update(id, file);
   }
 
