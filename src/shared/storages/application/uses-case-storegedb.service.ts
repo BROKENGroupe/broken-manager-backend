@@ -3,7 +3,7 @@ import { AssetEntity, UploadStorageRepository } from '@storages/domain';
 import { DeleteApiResponse, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
 
 @Injectable()
-export class UsescaseStorageService {
+export class UsescaseStorageDBService {
 
     constructor(readonly uploadRepository: UploadStorageRepository){}
 

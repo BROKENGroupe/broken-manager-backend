@@ -6,3 +6,4 @@ export interface Image{
   blurWidth?: number;
   blurHeight?: number;
 }
+
