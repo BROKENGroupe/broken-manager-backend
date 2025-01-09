@@ -17,7 +17,7 @@ export class CloudinaryRepositoryImpl implements UploadStorageRepository {
         cloudinary.config(cloudinaryConfig);
     }
 
-    async upload(file: Express.Multer.File,): Promise<AssetEntity> {
+    async upload(file: Express.Multer.File): Promise<AssetEntity> {
 
         // Espera el resultado de Cloudinary
         const result = await new Promise<UploadApiResponse>((resolve, reject) => {
@@ -35,6 +35,8 @@ export class CloudinaryRepositoryImpl implements UploadStorageRepository {
             width: result.width,
             height: result.height
         }
+
+        console.log(result)
 
         // Crea y devuelve el AssetEntity
         return new AssetEntity(

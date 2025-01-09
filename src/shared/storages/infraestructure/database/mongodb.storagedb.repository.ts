@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { UsescaseStorageService } from "@storages/application";
 import { AssetEntity } from "@storages/domain";
 import { UploadStorageDBRepository } from "@storages/domain/repositories/upload-storagedb.repository";
@@ -8,7 +8,7 @@ import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 
 @Injectable()
-export class MongoDBRespositoryImpl implements UploadStorageDBRepository {
+export class MongoDBUploadRespositoryImpl implements UploadStorageDBRepository {
 
     constructor(@InjectModel(Asset.name)
     private readonly assetModel: Model<Asset>,
@@ -16,7 +16,6 @@ export class MongoDBRespositoryImpl implements UploadStorageDBRepository {
 
     async save(file: Express.Multer.File): Promise<AssetEntity> {
         const fileAsset: AssetEntity = await this.usescaseStorageService.upload(file)
-
         if (fileAsset) {
             const asset = new this.assetModel(fileAsset)
             return await asset.save()
@@ -28,6 +27,15 @@ export class MongoDBRespositoryImpl implements UploadStorageDBRepository {
     }
     update(id: string, options: UpdateApiOptions): Promise<AssetEntity> {
         throw new Error("Method not implemented.");
+    }
+
+    async getAssetsAll(): Promise<AssetEntity[] | []> {
+        const result = await this.assetModel.find().exec()
+        if (!result) {
+            throw new HttpException('No se encontraron registros', 404)
+        }
+
+        return result
     }
 
 }

@@ -1,4 +1,4 @@
-import { Controller, Delete, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UsescaseStorageDBService } from '@storages/application';
 import { UsescaseStorageService } from '@storages/application/uses-case-storage.service';
@@ -13,7 +13,7 @@ export class StorageController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<AssetEntity> {
-    return await this.uploadFileUseCase.upload(file);
+    return await this.uploadFileUseCase.uploadToSave(file);
   }
 
   @Delete('delete/:id')
@@ -25,6 +25,11 @@ export class StorageController {
   @UseInterceptors(FileInterceptor('file'))
   async updateFile(@Param('id') id: string, @UploadedFile() file: Express.Multer.File): Promise<AssetEntity> {
     return await this.uploadFileUseCase.update(id, file);
+  }
+
+  @Get('all')
+  async getAssets(): Promise<AssetEntity[] | []> {
+    return await this.uploadFileUseCase.getAssets();
   }
 
 }

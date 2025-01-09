@@ -24,7 +24,10 @@ export class Asset extends Document {
     @Prop()
     size: number;
 
-    @Prop({ type: ImageSchema })
+    @Prop({
+        type: ImageSchema,
+        _id: false
+    })
     asset: IAsset;
 
     @Prop({ default: new Date().toISOString() })

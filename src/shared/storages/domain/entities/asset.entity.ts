@@ -17,6 +17,7 @@ export class AssetEntity {
       name,
       ext,
       asset,
+      size,
       createdAt,
       updatedAt,
     }: Partial<AssetEntity>) {
@@ -24,7 +25,8 @@ export class AssetEntity {
       this.assetId = assetId,
       this.name = name;
       this.ext = ext;
-      this.asset = asset
+      this.asset = asset,
+      this.size= size,
       this.createdAt = createdAt || new Date().toISOString();
       this.updatedAt = updatedAt || new Date().toISOString();
     }
