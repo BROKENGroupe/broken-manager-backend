@@ -8,8 +8,12 @@ export class UsescaseStorageDBService {
 
     constructor(readonly uploadRepository: UploadStorageDBRepository) { }
 
-    async uploadToSave(file: Express.Multer.File): Promise<AssetEntity> {
-        return await this.uploadRepository.save(file);
+    async uploadToSave(files: Express.Multer.File[], id: string): Promise<AssetEntity[]> {
+        return await this.uploadRepository.save(files, id);
+    }
+
+    async uploadToSaveTask(files: Express.Multer.File[], id: string, taskId: string): Promise<AssetEntity[]> {
+        return await this.uploadRepository.saveTask(files, id, taskId);
     }
 
     async delete(id: string): Promise<DeleteApiResponse> {
@@ -22,6 +26,14 @@ export class UsescaseStorageDBService {
 
     async getAssets(): Promise<AssetEntity[] | []> {
         return await this.uploadRepository.getAssetsAll();
+    }
+
+    async getAssetsById(id: string): Promise<AssetEntity[] | []> {
+        return await this.uploadRepository.getAssetsById(id);
+    }
+
+    async getAssetsTasksById(id: string): Promise<AssetEntity[] | []> {
+        return await this.uploadRepository.getAssetsTasksById(id);
     }
 
 }

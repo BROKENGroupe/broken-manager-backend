@@ -16,6 +16,9 @@ export class Asset extends Document {
     refId?: string;
 
     @Prop()
+    taskId?: string;
+
+    @Prop()
     ext: string;
 
     @Prop()

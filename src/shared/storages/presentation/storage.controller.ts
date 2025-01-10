@@ -1,9 +1,10 @@
-import { Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UsescaseStorageDBService } from '@storages/application';
 import { UsescaseStorageService } from '@storages/application/uses-case-storage.service';
 import { AssetEntity } from '@storages/domain';
 import { UploadApiResponse, UploadApiErrorResponse, DeleteApiResponse, UpdateApiOptions } from 'cloudinary';
+import { UploadDto } from './http-dtos/upload-files.http-dto';
 
 @Controller('storages')
 export class StorageController {
@@ -11,9 +12,15 @@ export class StorageController {
   constructor(private readonly uploadFileUseCase: UsescaseStorageDBService) { }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<AssetEntity> {
-    return await this.uploadFileUseCase.uploadToSave(file);
+  @UseInterceptors(FilesInterceptor('files'))
+  async uploadFile(@UploadedFiles() files: Express.Multer.File[], @Body() body: UploadDto): Promise<AssetEntity[]> {
+    return await this.uploadFileUseCase.uploadToSave(files, body.id);
+  }
+
+  @Post('upload/tasks')
+  @UseInterceptors(FilesInterceptor('files'))
+  async uploadFileTask(@UploadedFiles() files: Express.Multer.File[], @Body() body: UploadDto): Promise<AssetEntity[]> {
+    return await this.uploadFileUseCase.uploadToSaveTask(files, body.id, body.taskId);
   }
 
   @Delete('delete/:id')
@@ -30,6 +37,16 @@ export class StorageController {
   @Get('all')
   async getAssets(): Promise<AssetEntity[] | []> {
     return await this.uploadFileUseCase.getAssets();
+  }
+
+  @Get('all/:id')
+  async getAssetsById(@Param('id') id: string): Promise<AssetEntity[] | []> {
+    return await this.uploadFileUseCase.getAssetsById(id);
+  }
+
+  @Get('tasks/all/:id')
+  async getAssetsTasksById(@Param('id') id: string): Promise<AssetEntity[] | []> {
+    return await this.uploadFileUseCase.getAssetsTasksById(id);
   }
 
 }

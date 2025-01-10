@@ -21,7 +21,7 @@ export class CloudinaryRepositoryImpl implements UploadStorageRepository {
 
         // Espera el resultado de Cloudinary
         const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-            const upload = cloudinary.uploader.upload_stream(
+            const upload = cloudinary.uploader.upload_stream({folder: 'assets'},
                 (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
                     if (error) return reject(error); // En caso de error
                     resolve(result!); // Devuelve el resultado
@@ -35,10 +35,7 @@ export class CloudinaryRepositoryImpl implements UploadStorageRepository {
             width: result.width,
             height: result.height
         }
-
-        console.log(result)
-
-        // Crea y devuelve el AssetEntity
+        
         return new AssetEntity(
             {
                 assetId: result.public_id,
