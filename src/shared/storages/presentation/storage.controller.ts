@@ -1,10 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UsescaseStorageDBService } from '@storages/application';
-import { UsescaseStorageService } from '@storages/application/uses-case-storage.service';
 import { AssetEntity } from '@storages/domain';
-import { UploadApiResponse, UploadApiErrorResponse, DeleteApiResponse, UpdateApiOptions } from 'cloudinary';
-import { UploadDto } from './http-dtos/upload-files.http-dto';
+import { DeleteApiResponse } from 'cloudinary';
+import { UploadDto } from '@storages/presentation';
 
 @Controller('storages')
 export class StorageController {
