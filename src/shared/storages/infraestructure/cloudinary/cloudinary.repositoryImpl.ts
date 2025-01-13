@@ -9,6 +9,7 @@ import {
 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
 import { IAsset } from "@common/interfaces";
+import { getFileExtension } from "@common/utils/files.extension";
 
 @Injectable()
 export class CloudinaryRepositoryImpl implements UploadStorageRepository {
@@ -18,33 +19,44 @@ export class CloudinaryRepositoryImpl implements UploadStorageRepository {
     }
 
     async upload(file: Express.Multer.File): Promise<AssetEntity> {
-
-        // Espera el resultado de Cloudinary
+        try {
+              // Espera el resultado de Cloudinary
         const result = await new Promise<UploadApiResponse>((resolve, reject) => {
-            const upload = cloudinary.uploader.upload_stream({folder: 'assets'},
+            const upload = cloudinary.uploader.upload_stream(
+                {
+                    folder: 'assets',
+                    resource_type: 'auto',
+                    use_filename: true,
+                    discard_original_filename: false,
+                    filename_override: file.originalname
+                },
                 (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
                     if (error) return reject(error); // En caso de error
                     resolve(result!); // Devuelve el resultado
                 }
             );
-            toStream(file.buffer).pipe(upload); 
+            toStream(file.buffer).pipe(upload);
         });
 
         const asset: IAsset = {
             src: result.secure_url,
-            width: result.width,
-            height: result.height
-        }
-        
+            width: result.width ?? 0,
+            height: result.height ?? 0
+        }   
+
         return new AssetEntity(
             {
-                assetId: result.public_id,
+                assetId: result.asset_id,
                 name: result.display_name,
-                ext: result.format,
+                ext: result.format ?? getFileExtension(result.url),
                 size: result.bytes,
                 asset: asset,
             }
         );
+        } catch (error) {
+            console.log(error)
+        }
+      
     }
 
     async delete(id: string): Promise<DeleteApiResponse> {

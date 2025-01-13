@@ -17,8 +17,10 @@ export class MongoDBUploadRespositoryImpl implements UploadStorageDBRepository {
 
     async getAssetsTasksById(id: string): Promise<AssetEntity[] | []> {
         const result = await this.assetModel.find({
-            taskId: { $in: [id] }
-        }).exec();
+            taskId: { $in: [id] },
+        })
+            .sort({ createdAt: 'desc' })
+            .exec();
 
         if (!result) {
             throw new HttpException('No se encontraron registros', 404)
@@ -48,8 +50,10 @@ export class MongoDBUploadRespositoryImpl implements UploadStorageDBRepository {
 
     async getAssetsById(id: string): Promise<AssetEntity[] | []> {
         const result = await this.assetModel.find({
-            refId: { $in: [id] }
-        }).exec();
+            refId: { $in: [id] },
+        })
+            .sort({ createdAt: 'desc' })
+            .exec();
 
         if (!result) {
             throw new HttpException('No se encontraron registros', 404)
