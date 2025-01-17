@@ -3,8 +3,17 @@ import { Image } from '@common/interfaces';
 import { Document } from 'mongoose';
 import { ImageSchema } from '@database/mongodb';
 
-
-@Schema()
+@Schema({
+  toJSON: {
+    virtuals: true,
+    transform: (doc, ret) => {
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.__v;
+    },
+  },
+  toObject: { virtuals: true },
+})
 export class Task extends Document {
 
   @Prop()
@@ -77,21 +86,3 @@ export class Task extends Document {
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);
-
-TaskSchema.set('toJSON', {
-  versionKey: false,
-  transform: (doc, ret) => {
-    ret.id = ret._id;
-    delete ret._id;
-    return ret;
-  },
-});
-
-TaskSchema.set('toObject', {
-  versionKey: false,
-  transform: (doc, ret) => {
-    ret.id = ret._id;
-    delete ret._id;
-    return ret;
-  },
-});

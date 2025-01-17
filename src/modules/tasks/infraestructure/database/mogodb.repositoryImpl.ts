@@ -159,36 +159,15 @@ export class MongoDBRespositoryImpl extends TaskRepository {
     }
 
     async findTaskOrderByBoard(projectId: string): Promise<TaskEntity[] | []> {
-        const taskOrder = await this.taskOrderModel.aggregate([
-            // Filtro para encontrar documentos con el projectId dado
-            { $match: { projectId: projectId } },
+        const taskOrder = await this.taskOrderModel
+        .findOne({ boardId: projectId })
+        .populate({
+          path: 'tasks',
+          select: '_id boardId title status tags priority percentage createdAt updatedAt assign list',
+        })
+        .exec();
 
-            // Selecciona solo los campos necesarios
-            {
-                $project: {
-                    arrayField: 1,
-                    tasks: 1,
-                    id: { $toString: "$_id" }
-                }
-            }, // Convierte _id a id } },
-
-            // Realiza el "populate" en el campo `tasks` utilizando $lookup
-            {
-                $lookup: {
-                    from: 'tasks',          // Nombre de la colección relacionada (asegúrate de que sea correcto)
-                    localField: 'tasks',    // Campo en `taskOrder` que contiene los IDs
-                    foreignField: '_id',    // Campo en la colección `tasks` que conecta con `localField`
-                    as: 'tasks',            // Nombre del campo en el resultado que contendrá los datos "populados"
-                },
-            },
-        ]);
-
-        if (!taskOrder || taskOrder.length === 0) {
-            throw new HttpException(HttpErrors.NOT_FOUND, 400);
-        }
-
-        
-        return taskOrder
+        return taskOrder.tasks
 
 
     }
