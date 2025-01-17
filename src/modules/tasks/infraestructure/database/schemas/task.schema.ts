@@ -3,10 +3,9 @@ import { Image } from '@common/interfaces';
 import { Document } from 'mongoose';
 import { ImageSchema } from '@database/mongodb';
 
-export type TaskDocument = Task & Document;
 
 @Schema()
-export class Task {
+export class Task extends Document {
 
   @Prop()
   id?: string;

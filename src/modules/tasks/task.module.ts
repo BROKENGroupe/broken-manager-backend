@@ -3,7 +3,7 @@ import { DatabaseModule } from '@database/database.module';
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SubTask, SubTaskRepositoryProvider, SubTaskSchema, TaskRepositoryProvider } from '@tasks/infraestructure';
+import { SubTask, SubTaskRepositoryProvider, SubTaskSchema, TaskOrder, TaskOrderSchema, TaskRepositoryProvider } from '@tasks/infraestructure';
 import { CommentController, TaskController } from '@tasks/presentation';
 import { Task, TaskSchema } from '@tasks/infraestructure';
 import { UseCaseSubTaskService, UseCaseTaskService } from '@tasks/application';
@@ -13,7 +13,8 @@ import { SubTaskController } from './presentation/subtask.controller';
     imports: [
         MongooseModule.forFeature([
             { name: Task.name, schema: TaskSchema },
-            { name: SubTask.name, schema: SubTaskSchema }
+            { name: SubTask.name, schema: SubTaskSchema },
+            { name: TaskOrder.name, schema: TaskOrderSchema }
         ]),
         DatabaseModule.forRoot()
     ],

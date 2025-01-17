@@ -10,6 +10,9 @@ export class CreateTaskDto {
     @IsString()
     boardId?: string;
 
+    @IsOptional()
+    @IsString()
+    projectId?: string;
 
     @IsString()
     title: string;
