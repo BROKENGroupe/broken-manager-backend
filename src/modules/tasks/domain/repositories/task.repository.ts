@@ -9,7 +9,7 @@ export abstract class TaskRepository {
   abstract update(id: string, project: UpdateTaskDto): Promise<TaskEntity | null>;
   abstract findById(id: string): Promise<TaskEntity | []>;
   abstract findAll(): Promise<TaskEntity[]>;
-  abstract delete(id: string): Promise<successResponseDto>;
+  abstract delete(boardId: string, taskId: string): Promise<successResponseDto>;
   abstract orderTaskMove(tasks: TaskOrderDto): Promise<TaskOrderEntity | successResponseDto>;
   abstract saveTasksMove(tasks: any): Promise<any>;
   abstract findTaskOrderByBoard(id: string): Promise<TaskEntity[] | []>;

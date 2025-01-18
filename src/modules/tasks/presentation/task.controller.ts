@@ -48,8 +48,8 @@ export class TaskController {
     return this.useCaseService.update(id, task);
   }
 
-  @Delete('delete/:id')
-  async deleteTask(@Param('id') id: string): Promise<successResponseDto> {
-    return this.useCaseService.delete(id);
+  @Delete('delete/:boardId/:taskId')
+  async deleteTask(@Param('boardId') boardId: string, @Param('taskId') taskId: string): Promise<successResponseDto> {
+    return this.useCaseService.delete(boardId, taskId);
   }
 }

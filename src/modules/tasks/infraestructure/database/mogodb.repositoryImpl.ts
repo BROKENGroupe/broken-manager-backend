@@ -1,6 +1,6 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { isValidObjectId, Model, Types, ObjectId } from "mongoose";
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
 import { CreateTaskDto, TaskOrderDto, UpdateTaskDto } from "@tasks/presentation";
 import { HttpErrors, HttpSuccess, successResponseDto } from "@common/handlers";
@@ -119,6 +119,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
                     updatedAt: new Date().toISOString(),
                     date: taskDto.date,
                     priority: taskDto.priority,
+                    percentage: taskDto.percentage
                 }
             },
             {
@@ -128,44 +129,71 @@ export class MongoDBRespositoryImpl extends TaskRepository {
         return result ?? null
     }
 
-    async delete(id: string): Promise<successResponseDto> {
+    async delete(boardId: string, taskId: string): Promise<successResponseDto> {
 
-        if (!isValidObjectId(id)) {
-            throw new HttpException(HttpErrors.BAD_REQUEST, 400)
+        // Validar que ambos IDs son válidos
+        if (!isValidObjectId(boardId) || !isValidObjectId(taskId)) {
+            throw new HttpException(
+                { statusCode: 400, message: 'Invalid boardId or taskId' },
+                HttpStatus.BAD_REQUEST,
+            );
         }
 
-        const taskId = new Types.ObjectId(id);
+        const mBoardId = new Types.ObjectId(boardId);
+        const mTaskId = new Types.ObjectId(taskId);
 
+        // Verificar si el board existe
+        const updatedBoard = await this.taskOrderModel
+            .findOneAndUpdate({ boardId: boardId },
+                { $pull: { tasks: taskId } },
+                { new: true }
+            ).exec();
+        if (!updatedBoard) {
+            throw new HttpException(
+                { statusCode: 404, message: 'Board not found' },
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        // // Verificar si la tarea existe
         const task = await this.taskModel.findById(taskId);
         if (!task) {
-            throw new HttpException(HttpErrors.NOT_FOUND, 400)
+            throw new HttpException(
+                { statusCode: 404, message: 'Task not found' },
+                HttpStatus.NOT_FOUND,
+            );
         }
 
-        const result = await this.taskModel.findByIdAndDelete(id)
-
+        // Eliminar la tarea
+        const result = await this.taskModel.findByIdAndDelete(mTaskId);
         if (!result) {
-            throw new HttpException(HttpErrors.NOT_FOUND, 400)
+            throw new HttpException(
+                { statusCode: 404, message: 'Task deletion failed' },
+                HttpStatus.NOT_FOUND,
+            );
         }
 
+        // Responder con un mensaje de éxito
         const respo: successResponseDto = {
             success: true,
-            message: HttpSuccess.DELETE.message,
-            statusCode: 201,
+            message: 'Task successfully deleted',
+            statusCode: HttpStatus.OK,
             timestamp: new Date().toISOString(),
-            path: `/task/delete/${id}`,
-        }
+            path: `/task/delete/${mTaskId}`,
+        };
 
-        return respo
+        return respo;
+
     }
 
-    async findTaskOrderByBoard(projectId: string): Promise<TaskEntity[] | []> {
+    async findTaskOrderByBoard(boardId: string): Promise<TaskEntity[] | []> {
         const taskOrder = await this.taskOrderModel
-        .findOne({ boardId: projectId })
-        .populate({
-          path: 'tasks',
-          select: '_id boardId title status tags priority percentage createdAt updatedAt assign list',
-        })
-        .exec();
+            .findOne({ boardId: boardId })
+            .populate({
+                path: 'tasks',
+                select: '_id boardId title status tags date priority percentage createdAt updatedAt assign list',
+            })
+            .exec();
 
         return taskOrder.tasks
 

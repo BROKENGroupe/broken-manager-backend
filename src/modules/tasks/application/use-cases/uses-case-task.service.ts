@@ -37,7 +37,7 @@ export class UseCaseTaskService {
     return this.taskRepository.update(id, taskDto);
   }
 
-  async delete(id: string): Promise<successResponseDto> {
-    return this.taskRepository.delete(id);
+  async delete(boardId: string,  taskId: string): Promise<successResponseDto> {
+    return this.taskRepository.delete(boardId, taskId);
   }
 }
