@@ -1,5 +1,5 @@
 import { InjectModel } from "@nestjs/mongoose";
-import { isValidObjectId, Model, Types, ObjectId } from "mongoose";
+import { isValidObjectId, Model, Types } from "mongoose";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { TaskRepository, TaskEntity } from "@tasks/domain";
 import { CreateTaskDto, TaskOrderDto, UpdateTaskDto } from "@tasks/presentation";
@@ -129,7 +129,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
         return result ?? null
     }
 
-    async delete(boardId: string, taskId: string): Promise<successResponseDto> {
+    async delete(boardId: string, taskId: string): Promise<TaskEntity> {
 
         // Validar que ambos IDs son válidos
         if (!isValidObjectId(boardId) || !isValidObjectId(taskId)) {
@@ -144,7 +144,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
 
         // Verificar si el board existe
         const updatedBoard = await this.taskOrderModel
-            .findOneAndUpdate({ boardId: boardId },
+            .findOneAndUpdate({ boardId: mBoardId },
                 { $pull: { tasks: taskId } },
                 { new: true }
             ).exec();
@@ -182,7 +182,7 @@ export class MongoDBRespositoryImpl extends TaskRepository {
             path: `/task/delete/${mTaskId}`,
         };
 
-        return respo;
+        return result;
 
     }
 
